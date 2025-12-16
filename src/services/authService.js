@@ -2,24 +2,54 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcryptjs");
 
+const tokenService = require("../utils/tokenService");
+
 const login = async (data) => {
   const user = await prisma.user.findUnique({
     where: {
       email: data.email,
     },
+    include: {
+      role: true,
+    },
   });
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error("Invalid credentials");
   }
 
   const isPasswordValid = await bcrypt.compare(data.password, user.password);
 
   if (!isPasswordValid) {
-    throw new Error("Invalid password");
+    throw new Error("Invalid credentials");
   }
 
-  return user;
+  const accessToken = tokenService.generateAccessToken(user.id);
+  const refreshToken = tokenService.generateRefreshToken(user.id);
+
+  const expiresAt = new Date();
+  expiresAt.setDate(expiresAt.getDate() + 7);
+
+  await prisma.authToken.create({
+    data: {
+      token: refreshToken,
+      userId: user.id,
+      expiresAt: expiresAt,
+    },
+  });
+
+  return {
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role.name,
+    },
+    tokens: {
+      accessToken,
+      refreshToken,
+    },
+  };
 };
 
 const register = async (body) => {

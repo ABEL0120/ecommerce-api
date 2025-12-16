@@ -3,8 +3,8 @@ const response = require("../utils/response");
 
 const login = async (req, res) => {
   try {
-    const user = await authService.login(req.body);
-    return response.success(res, user, "Login successful");
+    const result = await authService.login(req.body);
+    return response.success(res, result, "Login successful");
   } catch (error) {
     console.error("Error logging in:", error);
     return response.error(res, error.message || "Internal server error", 500);
