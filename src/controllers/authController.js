@@ -21,7 +21,19 @@ const register = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    await authService.logout(userId);
+    return response.success(res, null, "Logout successful");
+  } catch (error) {
+    console.error("Error logging out:", error);
+    return response.error(res, error.message || "Internal server error", 500);
+  }
+};
+
 module.exports = {
   login,
   register,
+  logout,
 };

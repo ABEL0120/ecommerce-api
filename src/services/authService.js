@@ -52,6 +52,15 @@ const login = async (data) => {
   };
 };
 
+const logout = async (userId) => {
+  const result = await prisma.authToken.deleteMany({
+    where: {
+      userId: userId,
+    },
+  });
+  return result;
+};
+
 const register = async (body) => {
   const role = await prisma.role.findUnique({
     where: {
@@ -80,4 +89,5 @@ const register = async (body) => {
 module.exports = {
   login,
   register,
+  logout,
 };
