@@ -1,5 +1,5 @@
 const response = require("../utils/response");
-const tokenService = require("../utils/tokenService");
+const tokenService = require("../services/tokenService");
 
 const authenticate = (req, res, next) => {
   try {

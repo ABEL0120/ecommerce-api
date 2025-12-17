@@ -26,7 +26,17 @@ const login = Joi.object({
   }),
 });
 
+const verify = Joi.object({
+  userId: Joi.string().required().messages({
+    "any.required": "El userId es obligatorio",
+  }),
+  code: Joi.string().required().messages({
+    "any.required": "El código es obligatorio",
+  }),
+});
+
 module.exports = {
   register,
   login,
+  verify,
 };

@@ -20,6 +20,7 @@ model User {
   password  String      @db.VarChar(255)
   roleId    String      @db.VarChar(36)
   role      Role        @relation(fields: [roleId], references: [id])
+  code      String      @db.VarChar(255)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   tokens    AuthToken[]
