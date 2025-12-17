@@ -5,6 +5,8 @@ CREATE TABLE `User` (
     `name` VARCHAR(255) NULL,
     `password` VARCHAR(255) NOT NULL,
     `roleId` VARCHAR(36) NOT NULL,
+    `code` VARCHAR(255) NOT NULL,
+    `codeExpiryAt` DATETIME(3) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
