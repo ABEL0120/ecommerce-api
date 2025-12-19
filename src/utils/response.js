@@ -22,7 +22,7 @@ const createResponse = (res, statusCode, success, message, payload = {}) => {
 exports.success = (
   res,
   data,
-  message = "Operation successful",
+  message = "Operación exitosa",
   statusCode = 200
 ) => {
   return createResponse(res, statusCode, true, message, { data });
@@ -38,7 +38,7 @@ exports.success = (
  */
 exports.error = (
   res,
-  message = "Internal Server Error",
+  message = "Error interno del servidor",
   statusCode = 500,
   errors = null
 ) => {
@@ -52,5 +52,5 @@ exports.error = (
  * @param {any} errors - Lista o objeto de errores de validación
  */
 exports.validation = (res, errors) => {
-  return createResponse(res, 400, false, "Validation Error", { errors });
+  return createResponse(res, 400, false, "Error de validación", { errors });
 };

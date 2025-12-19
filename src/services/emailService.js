@@ -60,7 +60,7 @@ const sendVerificationCode = async (to, code) => {
                               <tr>
                                 <td align="center">
                                   <div style="background-color: #f3f4f6; border-radius: 12px; padding: 24px; display: inline-block; border: 1px solid #e5e7eb;">
-                                    <span style="font-family: 'Courier New', Courier, monospace; font-size: 32px; font-weight: 700; letter-spacing: 8px; color: #111827; display: block; text-align: center;">123456</span>
+                                    <span style="font-family: 'Courier New', Courier, monospace; font-size: 32px; font-weight: 700; letter-spacing: 8px; color: #111827; display: block; text-align: center;">${code}</span>
                                   </div>
                                 </td>
                               </tr>

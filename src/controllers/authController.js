@@ -7,21 +7,29 @@ const login = async (req, res) => {
     return response.success(
       res,
       result,
-      "Login successful, check your email for the code"
+      "Login exitoso, verifique su correo electrónico para el código"
     );
   } catch (error) {
-    console.error("Error logging in:", error);
-    return response.error(res, error.message || "Internal server error", 500);
+    console.error("Error al iniciar sesión:", error);
+    return response.error(
+      res,
+      error.message || "Error interno del servidor",
+      500
+    );
   }
 };
 
 const register = async (req, res) => {
   try {
     const user = await authService.register(req.body);
-    return response.success(res, user, "Registration successful", 201);
+    return response.success(res, user, "Registro exitoso", 201);
   } catch (error) {
-    console.error("Error registering:", error);
-    return response.error(res, error.message || "Internal server error", 500);
+    console.error("Error al registrar:", error);
+    return response.error(
+      res,
+      error.message || "Error interno del servidor",
+      500
+    );
   }
 };
 
@@ -29,10 +37,14 @@ const logout = async (req, res) => {
   try {
     const userId = req.user.id;
     await authService.logout(userId);
-    return response.success(res, null, "Logout successful");
+    return response.success(res, null, "Cierre de sesión exitoso");
   } catch (error) {
-    console.error("Error logging out:", error);
-    return response.error(res, error.message || "Internal server error", 500);
+    console.error("Error al cerrar sesión:", error);
+    return response.error(
+      res,
+      error.message || "Error interno del servidor",
+      500
+    );
   }
 };
 
@@ -40,10 +52,14 @@ const verifyCode = async (req, res) => {
   try {
     const { userId, code } = req.body;
     const result = await authService.verifyCode({ userId, code });
-    return response.success(res, result, "Code verified successfully");
+    return response.success(res, result, "Código verificado exitosamente");
   } catch (error) {
-    console.error("Error verifying code:", error);
-    return response.error(res, error.message || "Internal server error", 500);
+    console.error("Error al verificar código:", error);
+    return response.error(
+      res,
+      error.message || "Error interno del servidor",
+      500
+    );
   }
 };
 

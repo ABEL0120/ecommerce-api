@@ -15,15 +15,16 @@ const login = async (data) => {
   });
 
   if (!user) {
-    throw new Error("Invalid credentials");
+    throw new Error("Credenciales inválidas");
   }
 
   const isPasswordValid = await bcrypt.compare(data.password, user.password);
   if (!isPasswordValid) {
-    throw new Error("Invalid credentials");
+    throw new Error("Credenciales inválidas");
   }
 
   const code = Math.floor(100000 + Math.random() * 900000).toString();
+  console.log(code);
   const hashedCode = await bcrypt.hash(code, 10);
 
   await prisma.user.update({
@@ -51,12 +52,12 @@ const verifyCode = async (data) => {
   });
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error("Usuario no encontrado");
   }
 
   const isCodeValid = await bcrypt.compare(data.code, user.code);
   if (!isCodeValid) {
-    throw new Error("Invalid code");
+    throw new Error("Código inválido");
   }
 
   const accessToken = tokenService.generateAccessToken(user.id);
@@ -112,7 +113,7 @@ const register = async (body) => {
   });
 
   if (!role) {
-    throw new Error("Role CUSTOMER not found");
+    throw new Error("Error al crear el usuario");
   }
 
   const user = await prisma.user.create({
