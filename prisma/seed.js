@@ -12,18 +12,21 @@ async function main() {
       email: "admin@ecommerce.com",
       password: password,
       roleName: "ADMIN",
+      status: true,
     },
     {
       name: "Customer",
       email: "customer@ecommerce.com",
       password: password,
       roleName: "CUSTOMER",
+      status: true,
     },
     {
       name: "Seller",
       email: "seller@ecommerce.com",
       password: password,
       roleName: "SELLER",
+      status: true,
     },
   ];
 
@@ -47,7 +50,7 @@ async function main() {
 
     if (!role) {
       console.warn(
-        `Role ${user.roleName} not found used for user ${user.email}`
+        `Role ${user.roleName} not found used for user ${user.email}`,
       );
       continue;
     }
@@ -64,6 +67,7 @@ async function main() {
         codeExpiryAt: new Date(),
         createdAt: new Date(),
         updatedAt: new Date(),
+        status: user.status,
       },
     });
     console.log(`Created/Updated user: ${upsertedUser.name}`);

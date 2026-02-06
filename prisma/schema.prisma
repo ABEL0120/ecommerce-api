@@ -25,6 +25,7 @@ model User {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   tokens       AuthToken[]
+  status       Boolean     @default(true)
 }
 
 model Role {
